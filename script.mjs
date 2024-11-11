@@ -435,5 +435,5 @@ const button = document.getElementById('create-button');
 const modal = document.getElementById('input-modal');
 modal.style.display="none";
 
-modal.addEventListener('click', (event) => {if (event.target == modal) {modal.style.display="none"}});
-button.addEventListener('click', (event) => { console.log("show"); modal.style.display="flex" } );
+modal.addEventListener('click', (event) => {if (event.target == modal) {document.body.style.overflow="auto"; modal.style.display="none"}});
+button.addEventListener('click', (event) => { console.log("show");document.body.style.overflow="hidden"; modal.style.display="flex" } );
