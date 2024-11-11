@@ -407,14 +407,7 @@ form.addEventListener('submit', (event) => {
     // bluesky
     // instagram
     const popup = document.createElement('div')
-    popup.style.position = 'fixed'
-    popup.style.top = '50%'
-    popup.style.left = '50%'
-    popup.style.transform = 'translate(-50%, -50%)'
-    popup.style.backgroundColor = 'white'
-    popup.style.padding = '20px'
-    popup.style.border = '1px solid black'
-    popup.style.zIndex = '1000'
+    popup.classList.add("popup");
 
     popup.innerHTML = `
         <button id="close-popup">Close</button>
@@ -431,9 +424,27 @@ form.addEventListener('submit', (event) => {
     popup.querySelector('#close-popup').addEventListener('click', () => popup.remove())
 })
 
-const button = document.getElementById('create-button');
+const createButton = document.getElementById('create-button');
 const modal = document.getElementById('input-modal');
 modal.style.display="none";
-
 modal.addEventListener('click', (event) => {if (event.target == modal) {document.body.style.overflow="auto"; modal.style.display="none"}});
-button.addEventListener('click', (event) => { console.log("show");document.body.style.overflow="hidden"; modal.style.display="flex" } );
+createButton.addEventListener('click', (event) => { console.log("show");document.body.style.overflow="hidden"; modal.style.display="flex" } );
+/**
+ * 
+ * @param {HTMLElement} modalEl 
+ */
+export function showModal(modalEl) {
+    document.body.style.overflow="hidden";
+    modalEl.style.display = "block";
+    // Handle clicking on the modal to dismiss.
+    function listener(event) {
+        if (event.target === modalEl) {
+            document.body.style.overflow = "auto";
+            modalEl.style.display = "none";
+            modalEl.removeEventListener('click', listener);
+        }
+    };
+    modalEl.addEventListener('click', listener);
+}   
+
+document.getElementById("btn-whats-this").addEventListener('click', (event) => showModal(document.getElementById("whats-this")));

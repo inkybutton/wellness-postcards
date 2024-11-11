@@ -580,14 +580,4 @@ blockquote :first-child {
 .footer a:hover {
     color: var(--text-highlight)
 }
-#input-modal {
-    top: 0;
-    width: 100% !important;
-    height: 100% !important;
-    position: fixed;
-    backdrop-filter: blur(6px);
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-}
   

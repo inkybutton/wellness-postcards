@@ -1,6 +1,6 @@
 // https://docs.google.com/spreadsheets/d/e/2PACX-1vRK60uZgiy1R8M3cPPXm3B512GgWSXRZF7iheQpISowPZNXPH_sppVi1kFWbRaZdoaFteKrMkZAzL0P/pub?output=csv
 import { csvParse } from "https://cdn.skypack.dev/d3-dsv@3";
-import { createPostcard, renderPostcard, stamps, images } from "./script.mjs";
+import { createPostcard, renderPostcard, stamps, images, showModal } from "./script.mjs";
 
 // get csv and parse it in browser
 const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRK60uZgiy1R8M3cPPXm3B512GgWSXRZF7iheQpISowPZNXPH_sppVi1kFWbRaZdoaFteKrMkZAzL0P/pub?output=csv';
@@ -55,8 +55,11 @@ data
         // when image is clicked, open its dataurl in a new tab
         img.style.cursor = 'pointer';
         img.addEventListener('click', () => {
-            const win = window.open();
-            win.document.write(`<img src="${img.src}">`);
+            const detailEl = document.getElementById('gallery-detail'); 
+            detailEl.getElementsByTagName('img')[0].src = img.src;
+            showModal(detailEl);
+            // const win = window.open();
+            // win.document.write(`<img src="${img.src}">`);
         });
         // add id to the image
         img.id = row.submission_id
